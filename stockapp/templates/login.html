@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container m-5">
+    <h3> Iniciar Sesión</h3>
+    <form action="" method="post" >
+        {% csrf_token %}
+        <table class="">
+            {{form.as_table}}
+        </table>
+        <div class="container m-3">
+            <button class="btn btn-primary" type="submit">Login</button>
+            <a href="">
+                <button class="btn btn-danger" type="reset">Cancel</button>
+            </a>
+
+        </div>
+        
+    </form>
+</div>  
+{% endblock content %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}
+Listado de articulos
+{% endblock title %}
+{% block content %}
+<div class="container p-3">
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}"><button type="button" class="btn btn-dark">Salir</button> </a>
+    <span> Bienvenido nuevamente {{user.first_name}}</span>
+
+    {%else %}
+    <a href="{% url 'login' %}"><button type="button" class="btn btn-primary">Ingresar</button> </a>
+    {% endif %}
+</div>
+<div class="container text-center">
+    <h1>Listado de productos</h1>
+</div>
+<table class="table table-light table-bordered text-center">
+    <thead class="table-dark">
+        <tr>
+            <th width="5%" scope="col">ID Producto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Categoría</th>
+            <th width="30%">Acciones</th>
+            <th width="30%">Imagen</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in productos %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.nombre}}</td>
+            <td>{{item.precio}}</td>
+            <td>{{item.stock}}</td>
+            <td>{{item.categoria_fk}}</td>
+            <td>{{item.imagen}}</td>
+            <td>
+                {% if user.is_authenticated and user.username == "admin" %}
+                <a href="{% url 'editar' item.id %}"><button type="button" class="btn btn-warning">Editar</button></a>
+                <a href="{% url 'eliminar' item.id %}"><button type="button"
+                        class="btn btn-danger">Eliminar</button></a>
+
+                {% else %}
+                <span>
+                    <p>Sin acciones disponibles</p>
+                </span>
+                {% endif %}
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#crearProducto">
+    Agregar Producto
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="crearProducto" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crear Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'crear' %}" method="post">
+                    {% csrf_token %}
+
+                    <table class="table table-borderless">
+                        {{formulario.as_table}}
+                    </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                <a href="{% url 'base' %}" class="btn btn-danger">Cancelar</a>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}
