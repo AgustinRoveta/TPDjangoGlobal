@@ -30,7 +30,7 @@ def editarProducto(req,id):
         contexto={"producto": producto,"formulario": formulario}
         return render(req, 'editar.html', contexto)
     elif req.method =="POST":
-        formulario=FormProducto(req.POST, instance=producto)
+        formulario=FormProducto(req.POST,req.FILES, instance=producto)
         if formulario.is_valid():
             formulario.save()
         return redirect('base')
@@ -38,7 +38,7 @@ def editarProducto(req,id):
 #Crear producto
 @login_required
 def crearProducto(req):
-    form_producto=FormProducto(req.POST)
+    form_producto=FormProducto(req.POST,req.FILES)
     if form_producto.is_valid():
         form_producto.save()
     return redirect('base')

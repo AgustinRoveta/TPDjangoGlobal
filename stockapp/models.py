@@ -19,7 +19,7 @@ class Productos(models.Model):
     precio = models.FloatField()
     stock  = models.IntegerField(default=0)
     categoria_fk=models.ForeignKey(Categorias, on_delete=models.CASCADE, null=True,default=1)#esta sera la foreign key que nos relaciona con la class categorias
-    imagen = models.ImageField(upload_to = 'stockapp', null=True,default=1)
+    imagen = models.ImageField(upload_to = 'stockapp', null=True,blank=True)
     def __str__(self):
         return self.nombre
     class Meta:

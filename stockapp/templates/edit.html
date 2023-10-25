@@ -9,7 +9,7 @@ Edición de producto
     <h2>Editar un producto</h2>
 </div>
 <div class="container-sm">
-    <form class="form-control" action="{% url 'editar' producto.id %}" method="post">
+    <form class="form-control" action="{% url 'editar' producto.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
 <table class="table table-borderless">
