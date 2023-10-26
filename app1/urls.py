@@ -15,4 +15,4 @@ urlpatterns = [
 
 # Agrega la configuración de archivos estáticos y multimedia solo si estás en modo de desarrollo.
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

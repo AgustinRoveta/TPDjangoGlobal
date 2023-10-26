@@ -28,7 +28,7 @@ def editarProducto(req,id):
     if req.method=="GET":
         formulario= FormProducto(instance=producto)
         contexto={"producto": producto,"formulario": formulario}
-        return render(req, 'editar.html', contexto)
+        return render(req, 'edit.html', contexto)
     elif req.method =="POST":
         formulario=FormProducto(req.POST,req.FILES, instance=producto)
         if formulario.is_valid():

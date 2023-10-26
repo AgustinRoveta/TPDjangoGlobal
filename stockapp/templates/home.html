@@ -24,6 +24,7 @@ Listado de articulos
             <th scope="col">Precio</th>
             <th scope="col">Stock</th>
             <th scope="col">Categoría</th>
+            <th scope="col">Origen</th>
             <th width="30%">Acciones</th>
             
         </tr>
@@ -37,9 +38,10 @@ Listado de articulos
             <td>{{item.precio}}</td>
             <td>{{item.stock}}</td>
             <td>{{item.categoria_fk}}</td>
+            <td>{{item.origen}}</td>
             
             <td>
-                {% if user.is_authenticated and user.username == "admin" %}
+                {% if user.is_authenticated and user.username == "global" %}
                 <a href="{% url 'editar' item.id %}"><button type="button" class="btn btn-warning">Editar</button></a>
                 <a href="{% url 'eliminar' item.id %}"><button type="button"
                         class="btn btn-danger">Eliminar</button></a>
