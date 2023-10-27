@@ -38,8 +38,14 @@ def editarProducto(req,id):
 #Crear producto
 @login_required
 def crearProducto(req):
-    form_producto=FormProducto(req.POST,req.FILES)
-    if form_producto.is_valid():
-        form_producto.save()
-    return redirect('base')
+    categorias= Categorias.objects.all()
+    if req.method=='POST':
+        form_producto=FormProducto(req.POST,req.FILES)
+        if form_producto.is_valid():
+            form_producto.save()
+        return redirect('base')
+    else:
+        form_producto=FormProducto()
+        contexto = {'categorias': categorias, 'form_producto': form_producto}
+    return render(req, 'home.html', contexto)
 

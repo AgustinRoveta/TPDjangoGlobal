@@ -26,20 +26,20 @@ Listado de articulos
             <th scope="col">Categoría</th>
             <th scope="col">Origen</th>
             <th width="30%">Acciones</th>
-            
+
         </tr>
     </thead>
     <tbody>
         {% for item in productos %}
         <tr>
             <td>{{item.id}}</td>
-            <td><img src="../../media/{{item.imagen}}" alt=""width="200px" ></td>
+            <td><img src="../../media/{{item.imagen}}" alt="" width="200px"></td>
             <td>{{item.nombre}}</td>
             <td>{{item.precio}}</td>
             <td>{{item.stock}}</td>
             <td>{{item.categoria_fk}}</td>
             <td>{{item.origen}}</td>
-            
+
             <td>
                 {% if user.is_authenticated and user.username == "global" %}
                 <a href="{% url 'editar' item.id %}"><button type="button" class="btn btn-warning">Editar</button></a>
@@ -72,11 +72,15 @@ Listado de articulos
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{% url 'crear' %}" method="post",enctype="multipart/form-data">
+                <form action="{% url 'crear' %}" method="post" ,enctype="multipart/form-data">
                     {% csrf_token %}
 
                     <table class="table table-borderless">
-                        {{formulario.as_table}}
+                        {{formulario.nombre.label_tag}} {{formulario.nombre}}
+                        {{formulario.precio.label_tag}} {{formulario.precio}}
+                        {{formulario.stock.label_tag}} {{formulario.stock}}
+                        {{formulario.categoria_fk.label_tag}} {{formulario.categoria_fk}}
+                        {{formulario.imagen.label_tag}} {{formulario.imagen}}
                     </table>
             </div>
             <div class="modal-footer">
