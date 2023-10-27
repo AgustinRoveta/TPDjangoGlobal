@@ -76,11 +76,7 @@ Listado de articulos
                     {% csrf_token %}
 
                     <table class="table table-borderless">
-                        {{formulario.nombre.label_tag}} {{formulario.nombre}}
-                        {{formulario.precio.label_tag}} {{formulario.precio}}
-                        {{formulario.stock.label_tag}} {{formulario.stock}}
-                        {{formulario.categoria_fk.label_tag}} {{formulario.categoria_fk}}
-                        {{formulario.imagen.label_tag}} {{formulario.imagen}}
+                        {{formulario.as_table}}
                     </table>
             </div>
             <div class="modal-footer">

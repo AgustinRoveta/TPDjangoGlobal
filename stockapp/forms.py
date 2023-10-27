@@ -6,10 +6,16 @@ from stockapp.models import Categorias, Productos
 
 
 class FormProducto(forms.ModelForm):
-    class Meta:
-        error= "Errors Found in your form"
-        model = Productos
-        fields= '__all__'
-        categoria_fk = forms.ModelChoiceField(
+    nueva_categoria = forms.CharField(
+        required=False, 
+        label='Nueva Categoría', 
+        widget=forms.TextInput(attrs={'placeholder': 'Escribe una nueva categoría'}))
+    categoria_fk = forms.ModelChoiceField(
         queryset=Categorias.objects.all(),
-        empty_label="Seleccionar categoría")
+        empty_label="Seleccionar categoría",
+        required=False 
+    )
+
+    class Meta:
+        model = Productos
+        fields = '__all__'
